@@ -1,0 +1,46 @@
+顶部：top:
+顶导航：topNav top_nav
+页头：    header  如：#header{属性:属性值;}或.header{属性:属性值;},
+页面主体：main         
+页脚：footer 
+侧栏：sideBar 
+边导航图标：sidebarIcon   
+广告：banner 
+
+外　套：wrap 
+栏目标题：title  
+内容：content 
+
+
+菜单：  menu   
+子菜单：subMenu 
+菜单内容1： menu1Content 
+导航：nav  
+子导航：subNav 
+搜索：search
+登录条：loginBar
+
+标志：logo   
+指南：guild 
+新闻：news 
+热点：hot
+下载：download  
+服务：service  
+登陆：login    
+注册：regisiter  
+合作伙伴：partner 
+版权：copyRight 
+友情链接：friendLink   
+
+ 
+标签页：tab  
+当前：current 
+文章列表：list                     
+提示信息：msg    
+加入：joinus
+小技巧：tips  
+投票：vote                     
+状态：status
+滚动：scroll                                                                                 
+按钮：btn                
+商　标：label  
