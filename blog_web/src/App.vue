@@ -13,8 +13,10 @@ export default {
 
 <style>
 html,body,#app{
- 		height: 98%;
- 		width: 99%;
+ 		height: 100%;
+ 		width: 100%;
+     margin: 0;
+     padding: 0;
 }
 .cf7fbfc{
   background: #f7fbfc;
@@ -27,5 +29,8 @@ html,body,#app{
 }
 .c769fcd{
   background: #769fcd;
+}
+.f769fcd{
+  color: #769fcd;
 }
 </style>
