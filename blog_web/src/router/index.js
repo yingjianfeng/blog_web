@@ -12,7 +12,13 @@ export default new Router({
     },
     {
       path: '/user',
-      component: () => import('@/views/user/user')
+      component: () => import('@/views/user/user'),
+      children: [
+        {
+          path: 'index',
+          component: () => import('@/views/user/index/index'),
+        }
+      ]
     }
   ]
 })

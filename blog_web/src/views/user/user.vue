@@ -1,19 +1,20 @@
 <template>
-    <div>
-      <topbar></topbar>  
-        
-        <div class="c"></div>
+  <div>
+    <topbar></topbar>
+    <div class="main">
+      <router-view></router-view>
     </div>
-
+  </div>
 </template>
 
 <script>
-import topbar from '@/components/topbar'
+import topbar from "@/components/topbar";
+
 export default {
   name: "user",
-   components: {
-      topbar
-    },
+  components: {
+    topbar
+  },
   data() {
     return {};
   }
@@ -21,9 +22,10 @@ export default {
 </script>
 
 <style>
-.c{
+
+.main{
   width: 100%;
-  height: 1000px;
-  background: rgb(148, 159, 165);
+  height: 100%;
+  margin-top: 10px;
 }
 </style>
