@@ -5,6 +5,9 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
 Vue.config.productionTip = false
+
+import axios from 'axios'
+
 Vue.use(ElementUI);
 import 'element-ui/lib/theme-chalk/index.css';
 /* eslint-disable no-new */
@@ -14,3 +17,5 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+Vue.prototype.$axios = axios
+axios.defaults.baseURL = 'http://localhost:8111/'
