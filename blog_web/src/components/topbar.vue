@@ -3,11 +3,11 @@
     <el-row id="topbar">
       <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
         <div class="left">
-          <el-col :xs="0" :sm="24" :md="24" :lg="4"></el-col>
-          <el-col :xs="8" :sm="24" :md="24" :lg="4">
+          <el-col :xs="0" :sm="4" :md="4" :lg="4"></el-col>
+          <el-col :xs="8" :sm="4" :md="4" :lg="4">
             <img class="left-img" src="@/assets/cloudblog.png" alt />
           </el-col>
-          <el-col :xs="0" :sm="24" :md="24" :lg="16">
+          <el-col :xs="0" :sm="16" :md="16" :lg="16">
             <el-menu mode="horizontal">
               <el-menu-item index="1">首页</el-menu-item>
               <el-menu-item index="2">问答</el-menu-item>
@@ -22,10 +22,10 @@
       </div>-->
       <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
         <div class="right">
-           <el-col :xs="18" :sm="4" :md="4" :lg="18" >
+           <el-col :xs="18" :sm="8" :md="8" :lg="18" >
              登录名
            </el-col>
-          <el-col :xs="6" :sm="20" :md="20" :lg="2" >
+          <el-col :xs="6" :sm="16" :md="16" :lg="2" >
             <el-dropdown class="topbar-dropdown" trigger="click">
               <span class="el-dropdown-link">
                 <i class="el-icon-arrow-down el-icon-s-promotion f769fcd"></i>

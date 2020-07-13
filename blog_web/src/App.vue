@@ -12,6 +12,13 @@ export default {
 </script>
 
 <style>
+@media screen and (max-width: 500px) {
+ .el-message {
+    min-width: 200px;
+  
+ }
+
+}
 html,body,#app{
  		height: 100%;
  		width: 100%;

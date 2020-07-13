@@ -12,13 +12,13 @@
     <!-- 主要部分 -->
     <el-row class="main">
       <el-col :xs="20" :sm="10" :md="8" :lg="6" :xl="4">
-        <el-input placeholder="请输入账号" clearable class="account mt10"></el-input>
-        <el-input placeholder="请输入密码" show-password class="password mt10"></el-input>
+        <el-input v-model="nickname" placeholder="请输入昵称" clearable class="account mt10"></el-input>
+        <el-input v-model="password" placeholder="请输入密码" show-password class="password mt10"></el-input>
         <el-row class="main-check mt10">
           <el-input placeholder="请输入验证码" class="main-check-input"></el-input>
           <el-button class="main-check-btn cf7fbfc">获取验证码</el-button>
         </el-row>
-        <el-button class="submit mt10 c769fcd">登录</el-button>
+        <el-button class="submit mt10 c769fcd" @click="login()">登录</el-button>
       </el-col>
     </el-row>
 
@@ -38,7 +38,34 @@
 export default {
   name: "login",
   data() {
-    return {};
+    return {
+      nickname: "",
+      password: ""
+    };
+  },
+  methods:{
+    login(){
+     const that = this;
+        
+      
+        this.$axios
+        .post(
+          "user/login" ,
+          {
+            "nickname":that.nickname,
+            "password":that.password
+          }
+        )
+        .then(function(response) {
+          console.log(response.data);
+          var code  = response.data.code;
+          if(code==200){
+            that.$message.success("登录成功")
+          }else{
+            that.$message.error(response.data.message);
+          }
+        })
+    }
   }
 };
 </script>
@@ -94,5 +121,9 @@ export default {
 }
 .mt10 {
   margin-top: 10px;
+}
+
+..el-message{
+  width: 200px;
 }
 </style>

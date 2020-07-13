@@ -1,17 +1,15 @@
 <template>
   <div id="index">
     <div class="main">
-     
-        <el-col :xs="0" :sm="24" :md="24" :lg="2"></el-col>
-        <el-col :xs="0" :sm="24" :md="24" :lg="4">
-          <intro></intro>
-        </el-col>
-        <el-col :xs="1" :sm="24" :md="24" :lg="1"></el-col>
-        <el-col :xs="22" :sm="24" :md="24" :lg="12">
-          <maincontent></maincontent>
-        </el-col>
-        <el-col :xs="1" :sm="24" :md="24" :lg="5"></el-col>
-      
+      <el-col :xs="0" :sm="2" :md="2" :lg="2"></el-col>
+      <el-col :xs="0" :sm="4" :md="4" :lg="4">
+        <intro></intro>
+      </el-col>
+      <el-col :xs="1" :sm="1" :md="1" :lg="1"></el-col>
+      <el-col :xs="22" :sm="17" :md="17" :lg="15">
+        <maincontent></maincontent>
+      </el-col>
+      <el-col :xs="1" :sm="0" :md="0" :lg="2"></el-col>
     </div>
   </div>
 </template>
