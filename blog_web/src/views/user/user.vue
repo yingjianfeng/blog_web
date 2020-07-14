@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="user">
     <topbar></topbar>
     <div class="main">
       <router-view></router-view>
@@ -22,10 +22,13 @@ export default {
 </script>
 
 <style>
-
+#user{
+  width: 100%;
+  min-height: 100%;
+}
 .main{
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   margin-top: 10px;
 }
 </style>

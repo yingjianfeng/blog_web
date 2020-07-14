@@ -22,15 +22,7 @@
       </el-col>
     </el-row>
 
-    <!-- 脚部分 -->
-    <el-row class="footer">
-      <el-col :xs="24" :sm="0" :md="0" :lg="0" :xl="0">
-        <span>移动端 个人博客 Copyright © 2020</span>
-      </el-col>
-      <el-col :xs="0" :sm="24" :md="24" :lg="24" :xl="24">
-        <span>PC端 个人博客 Copyright © 2020</span>
-      </el-col>
-    </el-row>
+    
   </div>
 </template>
 
@@ -100,12 +92,7 @@ export default {
   height: 69%;
 }
 
-.footer {
-  /* width: 100%; */
-  text-align: center;
-  font-size: 15px;
-  color: #769fcd;
-}
+
 
 .main-check {
   display: flex;

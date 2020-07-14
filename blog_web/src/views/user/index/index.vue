@@ -1,29 +1,34 @@
 <template>
   <div id="index">
-    <div class="main">
-      <el-col :xs="0" :sm="2" :md="2" :lg="2"></el-col>
-      <el-col :xs="0" :sm="4" :md="4" :lg="4">
-        <intro></intro>
+    <div class="index-top">
+      <el-col :xs="0" :sm="1" :md="1" :lg="2"></el-col>
+      <el-col :xs="24" :sm="22" :md="22" :lg="20">
+        <carousel class="top-carousel"></carousel>
       </el-col>
-      <el-col :xs="1" :sm="1" :md="1" :lg="1"></el-col>
-      <el-col :xs="22" :sm="17" :md="17" :lg="15">
+      <el-col :xs="0" :sm="1" :md="1" :lg="2"></el-col>
+    </div>
+    <div class="index-main">
+      <el-col :xs="1" :sm="1" :md="1" :lg="3"></el-col>
+      <el-col :xs="22" :sm="22" :md="22" :lg="18">
         <maincontent></maincontent>
+    
       </el-col>
-      <el-col :xs="1" :sm="0" :md="0" :lg="2"></el-col>
+      <el-col :xs="1" :sm="1" :md="1" :lg="3"></el-col>
     </div>
   </div>
 </template>
 
 <script>
-import intro from "@/views/user/index/childs/intro";
+import carousel from "@/views/user/index/childs/carousel";
 import maincontent from "@/views/user/index/childs/maincontent";
+
 export default {
   name: "index",
   data() {
     return {};
   },
   components: {
-    intro,
+    carousel,
     maincontent
   }
 };
@@ -31,12 +36,21 @@ export default {
 
 <style>
 #index {
-  /* background: gray; */
   width: 100%;
   height: 100%;
-}
-.main {
   display: flex;
-  justify-content: flex-start;
+  flex-flow: column;
+}
+.index-top {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.index-main {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
 }
 </style>

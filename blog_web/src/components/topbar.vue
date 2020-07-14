@@ -8,11 +8,11 @@
             <img class="left-img" src="@/assets/cloudblog.png" alt />
           </el-col>
           <el-col :xs="0" :sm="16" :md="16" :lg="16">
-            <el-menu mode="horizontal">
-              <el-menu-item index="1">首页</el-menu-item>
-              <el-menu-item index="2">问答</el-menu-item>
-              <el-menu-item index="3">博客</el-menu-item>
-              <el-menu-item index="4">维护中心</el-menu-item>
+            <el-menu mode="horizontal" @select="topage">
+              <el-menu-item index="index">首页</el-menu-item>
+              <el-menu-item index="questions">问答</el-menu-item>
+              <el-menu-item index="blog">博客</el-menu-item>
+              <el-menu-item index="bug">维护中心</el-menu-item>
             </el-menu>
           </el-col>
         </div>
@@ -26,15 +26,13 @@
              登录名
            </el-col>
           <el-col :xs="6" :sm="16" :md="16" :lg="2" >
-            <el-dropdown class="topbar-dropdown" trigger="click">
+            <el-dropdown class="topbar-dropdown" trigger="click" @command="topage">
               <span class="el-dropdown-link">
                 <i class="el-icon-arrow-down el-icon-s-promotion f769fcd"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item icon="el-icon-plus">首页</el-dropdown-item>
-                <el-dropdown-item icon="el-icon-circle-plus">问答</el-dropdown-item>
-                <el-dropdown-item icon="el-icon-circle-plus-outline">博客</el-dropdown-item>
-                <el-dropdown-item icon="el-icon-check">维护中心</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-plus" command="personal">个人中心</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-plus" command="baseinfo">基本信息设置</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </el-col>
@@ -52,6 +50,12 @@ export default {
   name: "topbat",
   data() {
     return {};
+  },
+  methods:{
+    topage(pagecode){
+      console.log(pagecode)
+      this.$router.push("/user/"+pagecode);
+    }
   }
 };
 </script>
@@ -65,6 +69,7 @@ export default {
   border-bottom: 1px solid #e6e6e6;
   position: fixed;
   background: white;
+  z-index: 999;
 }
 .el-menu {
   height: 50px;
