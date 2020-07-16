@@ -2,7 +2,9 @@
   <div id="questions">
     <el-col :xs="1" :sm="1" :md="1" :lg="3"></el-col>
     <el-col :xs="22" :sm="4" :md="4" :lg="13">
+     
       <maincontent></maincontent>
+     
     </el-col>
     <el-col :xs="1" :sm="1" :md="1" :lg="1"></el-col>
     <el-col :xs="0" :sm="4" :md="4" :lg="4">

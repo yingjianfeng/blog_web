@@ -26,11 +26,14 @@ export default {
   margin: 0;
 }
 
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
+.el-carousel__item:nth-child(n) {
+  background-color: #769fcd;
 }
 
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
+.el-carousel__item:nth-child(2n) {
+  background-color: #67c23a;
+}
+.el-carousel__item:nth-child(3n) {
+  background-color: #f56c6c;
 }
 </style>

@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view />
+   <transition name="el-zoom-in-center">
+      <router-view />
+   </transition>
     <!-- 脚部分 -->
     <el-row class="footer">
       <el-col :xs="24" :sm="0" :md="0" :lg="0" :xl="0">
@@ -59,7 +61,7 @@ body,
 }
 .footer {
   /* width: 100%; */
-  
+
   bottom: 0px;
   text-align: center;
   font-size: 15px;

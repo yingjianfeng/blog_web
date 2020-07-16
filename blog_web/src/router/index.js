@@ -35,6 +35,20 @@ export default new Router({
         {
           path: 'blog',
           component: () => import('@/views/user/blog/blog'),
+          children: [
+            {
+              path: 'list',
+              component: () => import('@/views/user/blog/childs/bloglist'),
+            },
+            {
+              path: 'show',
+              component: () => import('@/views/user/blog/childs/blogshow'),
+            }
+          ]
+        },
+        {
+          path: 'blogedit',
+          component: () => import('@/views/user/blog/childs/blogedit'),
         },
         {
           path: 'bug',
