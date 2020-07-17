@@ -59,6 +59,10 @@ body,
 .f769fcd {
   color: #769fcd;
 }
+.c67c23a{
+ background: #67c23a;
+}
+
 .footer {
   /* width: 100%; */
 

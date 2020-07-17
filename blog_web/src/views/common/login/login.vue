@@ -14,15 +14,17 @@
       <el-col :xs="20" :sm="10" :md="8" :lg="6" :xl="4">
         <el-input v-model="nickname" placeholder="请输入昵称" clearable class="account mt10"></el-input>
         <el-input v-model="password" placeholder="请输入密码" show-password class="password mt10"></el-input>
-        <el-row class="main-check mt10">
+        <el-row class="main-check mt10" v-show="check.ischeck">
           <el-input placeholder="请输入验证码" class="main-check-input"></el-input>
-          <el-button class="main-check-btn cf7fbfc">获取验证码</el-button>
+          <el-button
+            :disabled="check.btndisabled"
+            class="main-check-btn cb9d7ea white"
+            @click="getvalidatecode"
+          >{{check.message}}</el-button>
         </el-row>
-        <el-button class="submit mt10 c769fcd" @click="login()">登录</el-button>
+        <el-button class="submit mt10 c769fcd white" @click="login()">登录</el-button>
       </el-col>
     </el-row>
-
-    
   </div>
 </template>
 
@@ -32,37 +34,98 @@ export default {
   data() {
     return {
       nickname: "",
-      password: ""
+      password: "",
+      check: {
+        ischeck: false, //是否检查
+        message: "null", //显示文字
+        btndisabled: false, //是否可点击
+        timer: "", //定时器
+        time: 15 //倒计时
+      }
     };
   },
-  methods:{
-    login(){
-     const that = this;
-        
-      
-        this.$axios
-        .post(
-          "user/login" ,
-          {
-            "nickname":that.nickname,
-            "password":that.password
-          }
-        )
+  methods: {
+    checkvalidate() {
+      const that = this;
+      this.$axios.get("user/checkvalidate").then(function(response) {
+        console.log(response.data.data);
+        var data = response.data.data;
+        var code = data.code;
+        var message = data.message;
+        if (code == "00000") {
+          that.check.ischeck = false;
+        } else if (code == "99999") {
+          that.check.ischeck = false;
+          console.log("配置验证异常");
+        } else {
+          that.check.ischeck = true;
+          console.log(message);
+          that.check.message = message;
+        }
+      });
+    },
+    getvalidatecode() {
+      const that = this;
+      if (that.nickname == "") {
+        that.$message.error("请输入昵称再获取");
+        return;
+      }
+      that.check.btndisabled = true;
+      //发送请求
+      this.$axios
+        .get("user/getvalidatecode/" + that.nickname)
         .then(function(response) {
           console.log(response.data);
-          var code  = response.data.code;
-          if(code==200){
-            that.$message.success("登录成功")
-          }else{
+          var data = response.data.data;
+          var message = response.data.message;
+          if (message == "success") {
+            that.$message.success(data);
+          } else {
+            that.$message.error("发送失败,失败原因:" + data);
+          }
+        });
+      //开启定时
+      that.timer = setInterval(function() {
+        if (that.check.time == 1) {
+          //倒计时结束
+          that.check.btndisabled = false;
+          clearInterval(that.timer);
+          that.checkvalidate();
+          that.check.time = 15;
+        }
+        that.check.message = that.check.time + "秒之后再获取";
+        that.check.time--;
+      }, 1000);
+    },
+    login() {
+      const that = this;
+      this.$axios
+        .post("user/login", {
+          nickname: that.nickname,
+          password: that.password
+        })
+        .then(function(response) {
+          console.log(response.data);
+          var code = response.data.code;
+          if (code == 200) {
+            that.$message.success("登录成功");
+            that.$router.push("/user/questions");
+          } else {
             that.$message.error(response.data.message);
           }
-        })
+        });
     }
+  },
+  created() {
+    this.checkvalidate();
   }
 };
 </script>
 
 <style>
+.white{
+  color: white;
+}
 .head {
   display: flex;
   width: 100%;
@@ -87,12 +150,10 @@ export default {
   display: flex;
   justify-content: center; /* 水平居中 */
   /* align-items: center;  */
-  text-align: center;
+  /* text-align: center; */
   /* width: 100%; */
   height: 69%;
 }
-
-
 
 .main-check {
   display: flex;
@@ -110,7 +171,7 @@ export default {
   margin-top: 10px;
 }
 
-..el-message{
+.el-message {
   width: 200px;
 }
 </style>

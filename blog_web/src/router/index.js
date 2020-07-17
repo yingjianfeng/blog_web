@@ -8,6 +8,10 @@ export default new Router({
   mode: 'history',
   routes: [
     {
+      path: '/',
+      component: () => import('@/views/common/login/login')
+    },
+    {
       path: '/login',
       component: () => import('@/views/common/login/login')
     },

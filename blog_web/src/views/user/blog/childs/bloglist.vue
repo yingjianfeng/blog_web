@@ -1,43 +1,43 @@
 <template>
-  <div id="questionsmaincontent">
+  <div id="bloglist">
+    
     <el-card class="box-card">
       <div class="top">
         <span class="top-title">Q&amp;A累计：</span>
         <span class="top-title-value">5</span>
       </div>
-      <div class="item">
+      <div class="item" @click="showblogcontent(5)">
         <div class="item-left">
           <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
         </div>
         <div class="item-right">
           <div class="item-right-top">【张小飞】 blog开发日记</div>
           <div class="item-right-bottom">
-            <el-tag type="danger">未解决</el-tag>
+            <i class="el-icon-view item-right-bottom-views">50</i>
             <span class="item-right-bottom-time">2020-07-13 12:00:00</span>
           </div>
         </div>
       </div>
-      <div class="item">
+      <div class="item" @click="showblogcontent(5)">
         <div class="item-left">
           <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
         </div>
         <div class="item-right">
           <div class="item-right-top">【张小飞】 blog开发日记</div>
           <div class="item-right-bottom">
-            <el-tag type="danger">未解决</el-tag>
-
+            <i class="el-icon-view item-right-bottom-views">50</i>
             <span class="item-right-bottom-time">2020-07-13 12:00:00</span>
           </div>
         </div>
       </div>
-      <div class="item">
+      <div class="item" @click="showblogcontent(5)">
         <div class="item-left">
           <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
         </div>
         <div class="item-right">
           <div class="item-right-top">【张小飞】 blog开发日记</div>
           <div class="item-right-bottom">
-            <el-tag type="danger">未解决</el-tag>
+            <i class="el-icon-view item-right-bottom-views">50</i>
             <span class="item-right-bottom-time">2020-07-13 12:00:00</span>
           </div>
         </div>
@@ -52,17 +52,24 @@
 
 <script>
 export default {
-  name: "maincontent",
+  name: "bloglist",
   data() {
     return {};
+  },
+  methods:{
+    showblogcontent(id){
+      const that = this;
+      that.$router.push("/user/blog/show");
+    }
   }
 };
 </script>
 
 <style>
-#questionsmaincontent {
+#bloglist{
   background: white;
 }
+
 .top {
   margin-left: 10px;
   line-height: 30px;
@@ -78,6 +85,10 @@ export default {
   display: flex;
   flex-direction: row;
   margin-bottom: 15px;
+  box-sizing:border-box
+}
+.item:hover{
+  border-bottom: 0.8px solid #769fcd;
 }
 .item-left {
   /* width: 6%; */
@@ -111,5 +122,11 @@ export default {
   display: flex;
   justify-content: center;
   margin-top: 50px;
+}
+
+.el-tag {
+    height: 15px;
+    line-height: 15px;
+    font-size: 10px;
 }
 </style>
