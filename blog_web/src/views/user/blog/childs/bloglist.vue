@@ -63,7 +63,7 @@ export default {
               return;
           }
           that.bloginfo = response.data.data;
-          console.log(that.bloginfo);
+         
         });
     },
     showblogcontent(blog) {

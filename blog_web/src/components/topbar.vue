@@ -62,7 +62,7 @@ export default {
         this.$router.push("/");
         return;
       }
-      console.log(pagecode);
+    
       this.$router.push("/user/" + pagecode);
     },
     getbaseinfo() {
@@ -70,7 +70,7 @@ export default {
       that.$axios
         .get("user/getbaseinfo" )
         .then(function(response) {
-          console.log(response.data);
+          
           that.user = response.data.data;
         });
     }

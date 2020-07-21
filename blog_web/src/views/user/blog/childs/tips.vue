@@ -47,7 +47,7 @@ export default {
               return;
           }
          
-          console.log(response.data.data);
+         
           that.tags = response.data.data;
         });
     }
