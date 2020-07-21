@@ -22,10 +22,8 @@
       </div>-->
       <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
         <div class="right">
-           <el-col :xs="18" :sm="8" :md="8" :lg="18" >
-             登录名
-           </el-col>
-          <el-col :xs="6" :sm="16" :md="16" :lg="2" >
+          <el-col :xs="18" :sm="8" :md="8" :lg="18">{{user.name}}</el-col>
+          <el-col :xs="6" :sm="16" :md="16" :lg="2">
             <el-dropdown class="topbar-dropdown" trigger="click" @command="topage">
               <span class="el-dropdown-link">
                 <i class="el-icon-arrow-down el-icon-s-promotion f769fcd"></i>
@@ -33,6 +31,7 @@
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item icon="el-icon-plus" command="personal">个人中心</el-dropdown-item>
                 <el-dropdown-item icon="el-icon-plus" command="baseinfo">基本信息设置</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-plus" command="logout">退出</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </el-col>
@@ -49,13 +48,35 @@
 export default {
   name: "topbat",
   data() {
-    return {};
+    return {
+      user :{
+
+      }
+    };
   },
-  methods:{
-    topage(pagecode){
-      console.log(pagecode)
-      this.$router.push("/user/"+pagecode);
+  methods: {
+    topage(pagecode) {
+      if(pagecode=='logout'){
+        console.log('退出登录');
+        localStorage.removeItem("cloud_blog_token");
+        this.$router.push("/");
+        return;
+      }
+      console.log(pagecode);
+      this.$router.push("/user/" + pagecode);
+    },
+    getbaseinfo() {
+      const that = this;
+      that.$axios
+        .get("user/getbaseinfo" )
+        .then(function(response) {
+          console.log(response.data);
+          that.user = response.data.data;
+        });
     }
+  },
+  created() {
+    this.getbaseinfo()
   }
 };
 </script>

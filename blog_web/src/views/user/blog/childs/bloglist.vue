@@ -1,50 +1,38 @@
 <template>
   <div id="bloglist">
-    
     <el-card class="box-card">
       <div class="top">
         <span class="top-title">Q&amp;A累计：</span>
-        <span class="top-title-value">5</span>
+        <span class="top-title-value">{{bloginfo.total}}</span>
       </div>
-      <div class="item" @click="showblogcontent(5)">
+
+      <div
+        class="item"
+        @click="showblogcontent(item)"
+        v-for="(item,index) in bloginfo.blogs"
+        :key="index"
+      >
         <div class="item-left">
-          <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+          <el-avatar :src="item.user.head_img"></el-avatar>
         </div>
         <div class="item-right">
-          <div class="item-right-top">【张小飞】 blog开发日记</div>
+          <div class="item-right-top">{{item.blog.title}}</div>
           <div class="item-right-bottom">
-            <i class="el-icon-view item-right-bottom-views">50</i>
-            <span class="item-right-bottom-time">2020-07-13 12:00:00</span>
-          </div>
-        </div>
-      </div>
-      <div class="item" @click="showblogcontent(5)">
-        <div class="item-left">
-          <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-        </div>
-        <div class="item-right">
-          <div class="item-right-top">【张小飞】 blog开发日记</div>
-          <div class="item-right-bottom">
-            <i class="el-icon-view item-right-bottom-views">50</i>
-            <span class="item-right-bottom-time">2020-07-13 12:00:00</span>
-          </div>
-        </div>
-      </div>
-      <div class="item" @click="showblogcontent(5)">
-        <div class="item-left">
-          <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-        </div>
-        <div class="item-right">
-          <div class="item-right-top">【张小飞】 blog开发日记</div>
-          <div class="item-right-bottom">
-            <i class="el-icon-view item-right-bottom-views">50</i>
-            <span class="item-right-bottom-time">2020-07-13 12:00:00</span>
+            <i class="el-icon-view item-right-bottom-views">{{item.visit_times}}</i>
+            <span class="item-right-bottom-time">{{item.blog.create_date}}</span>
           </div>
         </div>
       </div>
 
       <div class="item-page">
-        <el-pagination layout="prev, pager, next" :total="30"></el-pagination>
+        <el-pagination
+          layout="prev, pager, next"
+          :page-size="bloginfo.size"
+          :total="bloginfo.total"
+          @prev-click="pre"
+          @next-click="next"
+          @current-change="pagechange"
+        ></el-pagination>
       </div>
     </el-card>
   </div>
@@ -54,19 +42,60 @@
 export default {
   name: "bloglist",
   data() {
-    return {};
+    return {
+      pagenumber: 1,
+      pagesize: 3,
+      bloginfo: {
+        blogs: {},
+        current: 1,
+        size: 1,
+        total: 5
+      }
+    };
   },
-  methods:{
-    showblogcontent(id){
+  methods: {
+    qryblogs(pagenumber, pagesize) {
       const that = this;
-      that.$router.push("/user/blog/show");
+      that.$axios
+        .get("/blog/qryblogs/" + pagenumber + "/" + pagesize)
+        .then(function(response) {
+          if(response==null){
+              return;
+          }
+          that.bloginfo = response.data.data;
+          console.log(that.bloginfo);
+        });
+    },
+    showblogcontent(blog) {
+      const that = this;
+      that.$router.push({
+        path: "/user/blog/show",
+        query: {
+          blog: JSON.stringify(blog)
+        }
+      });
+    },
+    pre() {
+      // console.log("pre");
+      this.qryblogs(--this.pagenumber, this.pagesize);
+    },
+    next() {
+      // console.log("next");
+      this.qryblogs(++this.pagenumber, this.pagesize);
+    },
+    pagechange(cpage) {
+      this.pagenumber = cpage;
+      this.qryblogs(this.pagenumber, this.pagesize);
     }
+  },
+  created() {
+    this.qryblogs(this.pagenumber, this.pagesize);
   }
 };
 </script>
 
 <style>
-#bloglist{
+#bloglist {
   background: white;
 }
 
@@ -85,10 +114,10 @@ export default {
   display: flex;
   flex-direction: row;
   margin-bottom: 15px;
-  box-sizing:border-box
+  box-sizing: border-box;
 }
-.item:hover{
-  border-bottom: 0.8px solid #769fcd;
+.item:hover {
+  border-right: 0.8px solid #769fcd;
 }
 .item-left {
   /* width: 6%; */
@@ -125,8 +154,8 @@ export default {
 }
 
 .el-tag {
-    height: 15px;
-    line-height: 15px;
-    font-size: 10px;
+  height: 15px;
+  line-height: 15px;
+  font-size: 10px;
 }
 </style>

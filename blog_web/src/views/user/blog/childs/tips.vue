@@ -6,16 +6,13 @@
       <p class="rule-content">提问内容描述一定要清楚，回答尽量靠近主题，禁止瞎水社区，违者暂停账号使用</p>
     </el-card>
     <el-card class="box-card tag">
-      <el-tag>标签一</el-tag>
-      <el-tag type="success" class="mt">标签二21</el-tag>
-      <el-tag type="info" class="mt">标签三</el-tag>
-      <el-tag type="warning" class="mt">标签四</el-tag>
-      <el-tag type="danger" class="mt">标签五</el-tag>
-      <el-tag>标签一</el-tag>
-      <el-tag type="success" class="mt">标签二21</el-tag>
-      <el-tag type="info" class="mt">标签三</el-tag>
-      <el-tag type="warning" class="mt">标签四</el-tag>
-      <el-tag type="danger" class="mt">标签五</el-tag>
+     
+      <el-tag  class="mt fontw"
+      v-for="(item,index) in tags"
+        :key="index"
+        :type='item.color'
+      >{{item.name}}</el-tag>
+     
     </el-card>
     <el-card class="box-card friendlink">
       <span class="link-title">友情链接</span>
@@ -32,13 +29,31 @@
 export default {
   name: "tips",
   data() {
-    return {};
+    return {
+      tags:[]
+    };
   },
   methods:{
     
     toedit(){
       this.$router.push("/user/blogedit");
+    },
+    qrytag(){
+      const that = this;
+      that.$axios
+        .get("/tag/qrytag/-1")
+        .then(function(response) {
+          if(response==null){
+              return;
+          }
+         
+          console.log(response.data.data);
+          that.tags = response.data.data;
+        });
     }
+  },
+  created(){
+    this.qrytag()
   }
 };
 </script>
@@ -46,6 +61,9 @@ export default {
 <style >
 .mt {
   margin-bottom: 9px;
+}
+.fontw{
+  /* color: white !important; */
 }
 #tips {
   /* background: gray; */
