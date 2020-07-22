@@ -30,15 +30,13 @@ Router.prototype.push = function push(location) {
 Vue.prototype.$axios = axios
 axios.defaults.baseURL = 'http://localhost:8111/'
 axios.interceptors.request.use(config => {
-  console.log('request');
-  console.log(localStorage.getItem("cloud_blog_token"));
+  
   config.headers.common['cloud_blog_token'] = window.localStorage.getItem("cloud_blog_token")
   return config;
 })
 // http response 响应拦截器
 axios.interceptors.response.use(response => {
-  console.log('response');
-  
+ 
   switch (response.data.code) {
     case 500:
       localStorage.removeItem('token');

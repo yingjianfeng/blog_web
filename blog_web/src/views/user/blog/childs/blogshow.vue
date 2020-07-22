@@ -11,7 +11,7 @@
             <i class="el-icon-view">50</i>
           </div>
         </el-col>
-         <el-col :xs="0" :sm="8" :md="8" :lg="7"></el-col>
+        <el-col :xs="0" :sm="8" :md="8" :lg="7"></el-col>
         <el-col :xs="0" :sm="5" :md="5" :lg="6">
           <div class="blog-top-bottom-right">
             <i class="el-icon-edit">编辑</i>
@@ -19,14 +19,22 @@
             <i class="el-icon-delete">删除</i>
           </div>
         </el-col>
-       
       </div>
     </div>
 
     <div class="blog-main">
-    {{blog.content}}
+      <mavon-editor
+        ref="md"
+        v-model="blog.content"
+        :toolbarsFlag="false"
+        defaultOpen="preview"
+        :subfield="false"
+        previewBackground="white"
+        :boxShadow="false"
+       
+      ></mavon-editor>
     </div>
-     <el-divider></el-divider>
+    <el-divider></el-divider>
     <div class="blog-bottom">底部</div>
   </el-card>
 </template>
@@ -37,8 +45,7 @@ export default {
   data() {
     return {
       blog: JSON.parse(this.$route.query.blog).blog,
-      user: JSON.parse(this.$route.query.blog).user,
-
+      user: JSON.parse(this.$route.query.blog).user
     };
   }
 };
@@ -54,11 +61,10 @@ export default {
   border-bottom: 1px solid #000;
   /* background: gray; */
 }
-.blog-main{
+.blog-main {
   min-height: 200px;
 }
-.blog-bottom{
-
+.blog-bottom {
 }
 .blog-top-title {
   color: black;
@@ -68,19 +74,19 @@ export default {
   /* display: flex;
      justify-content:  space-around; */
   width: 100%;
-   display: flex;
+  display: flex;
   flex-direction: row;
 }
-.blog-top-bottom-left{
-    font-size: 16px;
-    line-height: 30px;
+.blog-top-bottom-left {
+  font-size: 16px;
+  line-height: 30px;
 }
-.blog-top-bottom-left-date{
-    color: gray;
-    font-size: 13px;
+.blog-top-bottom-left-date {
+  color: gray;
+  font-size: 13px;
 }
-.blog-top-bottom-left-name{
-    color: #769fcd;
-    font-size: 13px;
+.blog-top-bottom-left-name {
+  color: #769fcd;
+  font-size: 13px;
 }
 </style>
