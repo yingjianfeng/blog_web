@@ -31,22 +31,43 @@
         :subfield="false"
         previewBackground="white"
         :boxShadow="false"
-       
       ></mavon-editor>
     </div>
     <el-divider></el-divider>
-    <div class="blog-bottom">底部</div>
+    <div class="blog-bottom">
+      <blogcomment :firstcomments = 'firstcomments'></blogcomment>
+    </div>
   </el-card>
 </template>
 
 <script>
+import blogcomment from "@/views/user/blog/childs/blogcomment";
 export default {
   name: "blogshow",
+  components: {
+    blogcomment
+  },
   data() {
     return {
       blog: JSON.parse(this.$route.query.blog).blog,
-      user: JSON.parse(this.$route.query.blog).user
+      user: JSON.parse(this.$route.query.blog).user,
+      firstcomments:[]
     };
+  },
+  methods: {
+    qryfirstcomment() {
+      const that = this;
+      var id = that.blog.id;
+      that.$axios
+        .get("/blog/qryfirstcomment/"+id)
+        .then(function(response) {
+          console.log(response.data.data);
+          that.firstcomments = response.data.data
+        });
+    }
+  },
+  created() {
+    this.qryfirstcomment();
   }
 };
 </script>
@@ -62,9 +83,10 @@ export default {
   /* background: gray; */
 }
 .blog-main {
-  min-height: 200px;
+  min-height: 50px;
 }
 .blog-bottom {
+  width: 100%;
 }
 .blog-top-title {
   color: black;
