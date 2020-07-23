@@ -1,6 +1,7 @@
 <template>
   <div id="user">
-    <topbar></topbar>
+    <topbar :isshow="showleftbar"></topbar>
+    <leftbar :isshow="showleftbar"></leftbar>
     <div class="main">
       <router-view></router-view>
     </div>
@@ -9,24 +10,29 @@
 
 <script>
 import topbar from "@/components/topbar";
-
+import leftbar from "@/components/leftbar";
 export default {
   name: "user",
   components: {
-    topbar
+    topbar,
+    leftbar
   },
   data() {
-    return {};
+    return {
+      showleftbar: {
+        isshow: false
+      }
+    };
   }
 };
 </script>
 
 <style>
-#user{
+#user {
   width: 100%;
   min-height: 100%;
 }
-.main{
+.main {
   width: 100%;
   min-height: 100%;
   margin-top: 10px;

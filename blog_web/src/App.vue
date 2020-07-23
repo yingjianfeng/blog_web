@@ -34,6 +34,9 @@ export default {
   #indexmaincontent .item {
     width: 100% !important;
   }
+  #showedit{
+    display: block !important;
+  }
 }
 html,
 body,

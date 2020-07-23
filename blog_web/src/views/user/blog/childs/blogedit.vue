@@ -3,30 +3,33 @@
     <el-col :xs="1" :sm="3" :md="3" :lg="3"></el-col>
     <el-col :xs="22" :sm="18" :md="18" :lg="18">
       <div class="blogedit-top">
-        {{blog}}
-        <div class="blogedit-top-left">
-          <div class="blogedit-top-left-itme-title mt">
-            <span class="blogedit-top-left-itme-span">标题</span>
-            <el-input
-              v-model="blog.title"
-              type="text"
-              placeholder="请想个标题吧"
-              maxlength="10"
-              show-word-limit
-            ></el-input>
+        <el-col :xs="24" :sm="15" :md="15" :lg="15">
+          <div class="blogedit-top-left">
+            <div class="blogedit-top-left-itme-title mt">
+              <span class="blogedit-top-left-itme-span">标题</span>
+              <el-input
+                v-model="blog.title"
+                type="text"
+                placeholder="请想个标题吧"
+                maxlength="10"
+                show-word-limit
+              ></el-input>
+            </div>
+            <div class="blogedit-top-left-itme-intro mt">
+              <span class="blogedit-top-left-itme-span">概述</span>
+              <el-input
+                v-model="blog.intro"
+                type="textarea"
+                placeholder="请简短概述"
+                maxlength="30"
+                show-word-limit
+              ></el-input>
+            </div>
           </div>
-          <div class="blogedit-top-left-itme-intro mt">
-            <span class="blogedit-top-left-itme-span">概述</span>
-            <el-input
-              v-model="blog.intro"
-              type="textarea"
-              placeholder="请简短概述"
-              maxlength="30"
-              show-word-limit
-            ></el-input>
-          </div>
-        </div>
-        <div class="blogedit-top-right"></div>
+        </el-col>
+        <el-col :xs="0" :sm="9" :md="9" :lg="9">
+          <div class="blogedit-top-right"></div>
+        </el-col>
       </div>
 
       <el-collapse-transition>
@@ -126,9 +129,9 @@ export default {
 .mt {
   margin: 10px;
 }
-.blogedit-top-left {
+/* .blogedit-top-left {
   width: 70%;
-}
+} */
 .blogedit-top-left-itme-title {
   display: flex;
   flex-direction: row;

@@ -2,8 +2,13 @@
   <div id="bloglist">
     <el-card class="box-card">
       <div class="top">
-        <span class="top-title">Q&amp;A累计：</span>
-        <span class="top-title-value">{{bloginfo.total}}</span>
+        <div class="top-left">
+          <span class="top-title">Q&amp;A累计：</span>
+          <span class="top-title-value">{{bloginfo.total}}</span>
+        </div>
+        <div class="top-rifht">
+          <i class="el-icon-edit f769fcd" id="showedit" @click="toedit"></i>
+        </div>
       </div>
 
       <div
@@ -59,11 +64,10 @@ export default {
       that.$axios
         .get("/blog/qryblogs/" + pagenumber + "/" + pagesize)
         .then(function(response) {
-          if(response==null){
-              return;
+          if (response == null) {
+            return;
           }
           that.bloginfo = response.data.data;
-         
         });
     },
     showblogcontent(blog) {
@@ -86,6 +90,9 @@ export default {
     pagechange(cpage) {
       this.pagenumber = cpage;
       this.qryblogs(this.pagenumber, this.pagesize);
+    },
+    toedit() {
+      this.$router.push("/user/blogedit");
     }
   },
   created() {
@@ -102,13 +109,20 @@ export default {
 .top {
   margin-left: 10px;
   line-height: 30px;
-  font-size: 15px;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 .top-title {
   color: #769fcd;
 }
 .top-title-value {
   color: #769fcd;
+}
+.top-right{
+   margin-left: 10px;
+  line-height: 30px;
+  font-size: 20px;
 }
 .item {
   display: flex;
@@ -157,5 +171,8 @@ export default {
   height: 15px;
   line-height: 15px;
   font-size: 10px;
+}
+#showedit {
+  display: none;
 }
 </style>

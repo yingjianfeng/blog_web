@@ -3,9 +3,16 @@
     <el-row id="topbar">
       <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
         <div class="left">
-          <el-col :xs="0" :sm="4" :md="4" :lg="4"></el-col>
-          <el-col :xs="8" :sm="4" :md="4" :lg="4">
-            <img class="left-img" src="@/assets/cloudblog.png" alt />
+          <el-col :xs="1" :sm="4" :md="4" :lg="4"></el-col>
+          <el-col :xs="7" :sm="4" :md="4" :lg="4">
+            <div class="left-bar-logo">
+              <el-col :xs="0" :sm="24" :md="24" :lg="24">
+                <img class="left-img" src="@/assets/cloudblog.png" alt />
+              </el-col>
+              <el-col :xs="24" :sm="0" :md="0" :lg="0">
+                <i @click="showleftbar" class="el-icon-s-unfold el-icon-s-promotion f769fcd"></i>
+              </el-col>
+            </div>
           </el-col>
           <el-col :xs="0" :sm="16" :md="16" :lg="16">
             <el-menu mode="horizontal" @select="topage">
@@ -22,7 +29,7 @@
       </div>-->
       <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
         <div class="right">
-          <el-col :xs="18" :sm="8" :md="8" :lg="18">{{user.name}}</el-col>
+          <el-col :xs="17" :sm="8" :md="8" :lg="18">{{user.name}}</el-col>
           <el-col :xs="6" :sm="16" :md="16" :lg="2">
             <el-dropdown class="topbar-dropdown" trigger="click" @command="topage">
               <span class="el-dropdown-link">
@@ -35,7 +42,7 @@
               </el-dropdown-menu>
             </el-dropdown>
           </el-col>
-          <el-col :xs="0" :sm="24" :md="24" :lg="4"></el-col>
+          <el-col :xs="1" :sm="24" :md="24" :lg="4"></el-col>
         </div>
       </el-col>
       <!-- </div> -->
@@ -47,36 +54,37 @@
 <script>
 export default {
   name: "topbat",
+  props: ["isshow"],
   data() {
     return {
-      user :{
-
-      }
+      user: {}
     };
   },
   methods: {
     topage(pagecode) {
-      if(pagecode=='logout'){
-        console.log('退出登录');
+      if (pagecode == "logout") {
+        console.log("退出登录");
         localStorage.removeItem("cloud_blog_token");
         this.$router.push("/");
         return;
       }
-    
+
       this.$router.push("/user/" + pagecode);
     },
     getbaseinfo() {
       const that = this;
-      that.$axios
-        .get("user/getbaseinfo" )
-        .then(function(response) {
-          
-          that.user = response.data.data;
-        });
+      that.$axios.get("user/getbaseinfo").then(function(response) {
+        that.user = response.data.data;
+      });
+    },
+    showleftbar() {
+      const that = this;
+      that.isshow.isshow = !that.isshow.isshow;
     }
   },
+
   created() {
-    this.getbaseinfo()
+    this.getbaseinfo();
   }
 };
 </script>
@@ -107,7 +115,12 @@ export default {
   /* justify-content: center; */
   justify-content: flex-start;
 }
-
+.left-bar-logo{
+  width: 100%;
+  height: 100%;
+  font-size: 30px;
+  line-height: 50px;
+}
 .center {
   height: 100%;
   /* background: rgb(17, 47, 110); */
