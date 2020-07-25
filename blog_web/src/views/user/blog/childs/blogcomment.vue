@@ -6,37 +6,63 @@
       </div>
       <div class="comment-right">
         <div class="comment-right-top">
-          <span class="nickname">{{item.user.name}}</span>
+          <span class="nickname">{{item.user.nickname}}</span>
           <span class="time">{{item.blogComment.create_date}}</span>
         </div>
         <div class="comment-right-center">{{item.blogComment.content}}</div>
         <div class="comment-right-bottom">
-          <i class="el-icon-edit">{{item.commoent_number}}</i>
-
-          <i class="el-icon-magic-stick">{{item.comment_like}}</i>
+          <i class="el-icon-chat-line-round">{{item.commoent_number}}</i>
+          &nbsp;
+          <i class="el-icon-thumb">{{item.comment_like}}</i>
         </div>
+        <blogcommentreply :s_item="item" :ramdom='Math.ramdom'></blogcommentreply>
+        <!-- <blogcommentinput></blogcommentinput> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+blogcommentreply;
+import blogcommentinput from "@/views/user/blog/childs/blogcommentinput";
+import blogcommentreply from "@/views/user/blog/childs/blogcommentreply";
 export default {
   name: "blogcomment",
+  components: {
+    blogcommentinput,
+    blogcommentreply
+  },
   props: ["firstcomments"],
   data() {
-    return {};
+    return {
+    };
+  },
+  watch: {
+    // firstcomments: {
+    //   handler(newValue, oldValue) {
+    //     this.fc = this.firstcomments;
+    //   },
+    //   deep: true
+    // }
   }
 };
 </script>
 
 <style>
+.comment-card {
+}
 .blogcomment {
+  padding-bottom: 5px;
+  padding-right: 5px;
   width: 100%;
   display: flex;
   flex-direction: row;
   margin-bottom: 5px;
-  box-shadow: 3px 3px 3px #769fcd;
+  border-bottom: 1px solid #769fcd;
+  /* box-shadow: 3px 3px 3px #769fcd;
+  border-top: 1px solid #769fcd;
+  border-left: 1px solid #769fcd; */
+  margin-bottom: 15px;
 }
 
 .comment-left {
@@ -58,7 +84,7 @@ export default {
   font-size: 15px;
 }
 .comment-right-center {
-  min-height: 80px;
+  min-height: 15px;
   word-wrap: break-word;
   word-break: break-all;
   padding-left: 5px;
@@ -68,8 +94,8 @@ export default {
 
 .comment-right-bottom {
   padding-right: 5px;
-  display: flex;
-  flex-direction: row-reverse;
+  /* display: flex;
+  flex-direction: row-reverse; */
 }
 .comment-left {
   line-height: 80px;

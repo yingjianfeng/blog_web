@@ -28,6 +28,7 @@ Router.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 };
 Vue.prototype.$axios = axios
+// axios.defaults.baseURL = 'http://localhost:8111/'
 axios.defaults.baseURL = 'http://localhost:8111/'
 axios.interceptors.request.use(config => {
   

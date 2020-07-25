@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-   <transition name="el-zoom-in-center">
+    <transition name="el-zoom-in-center">
       <router-view />
-   </transition>
+    </transition>
     <!-- 脚部分 -->
     <el-row class="footer">
       <el-col :xs="24" :sm="0" :md="0" :lg="0" :xl="0">
@@ -17,7 +17,25 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  peovide() {
+    return {
+      reload: this.reload
+    };
+  },
+  data() {
+    return {
+      isRouterAlive: true
+    };
+  },
+  methods: {
+    reload() {
+      this.isRouterAlive = false;
+      this.$nextTick(function() {
+        this.isRouterAlive = true;
+      });
+    }
+  }
 };
 </script>
 
@@ -34,7 +52,7 @@ export default {
   #indexmaincontent .item {
     width: 100% !important;
   }
-  #showedit{
+  #showedit {
     display: block !important;
   }
 }
@@ -62,8 +80,8 @@ body,
 .f769fcd {
   color: #769fcd;
 }
-.c67c23a{
- background: #67c23a;
+.c67c23a {
+  background: #67c23a;
 }
 
 .footer {

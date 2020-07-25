@@ -35,35 +35,58 @@
     </div>
     <el-divider></el-divider>
     <div class="blog-bottom">
-      <blogcomment :firstcomments = 'firstcomments'></blogcomment>
+      <blogcommentinput :flag="flag" :blog="blog" ></blogcommentinput>
+      <blogcomment :firstcomments="firstcomments" ></blogcomment>
     </div>
   </el-card>
 </template>
 
 <script>
+import blogcommentinput from "@/views/user/blog/childs/blogcommentinput";
 import blogcomment from "@/views/user/blog/childs/blogcomment";
 export default {
   name: "blogshow",
   components: {
-    blogcomment
+    blogcomment,
+    blogcommentinput
+  },
+  computed: {
+    jsonflag() {
+      return JSON.parse(JSON.stringify(this.flag));
+    }
   },
   data() {
     return {
+      flag: {
+        first: 1
+      },
       blog: JSON.parse(this.$route.query.blog).blog,
       user: JSON.parse(this.$route.query.blog).user,
-      firstcomments:[]
+      firstcomments: [],
     };
+  },
+  watch: {
+    jsonflag: {
+      handler(newValue, oldValue) {
+        const that = this;
+        if (oldValue.first < newValue.first) {
+          that.qryfirstcomment();
+        }
+        
+        //
+      },
+      deep: true
+    }
   },
   methods: {
     qryfirstcomment() {
+      ++this.index;
       const that = this;
       var id = that.blog.id;
-      that.$axios
-        .get("/blog/qryfirstcomment/"+id)
-        .then(function(response) {
-          console.log(response.data.data);
-          that.firstcomments = response.data.data
-        });
+      that.$axios.get("/blog/qryfirstcomment/" + id).then(function(response) {
+        that.firstcomments = response.data.data;
+        
+      });
     }
   },
   created() {
