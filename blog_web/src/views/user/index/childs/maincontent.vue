@@ -7,7 +7,7 @@
         解决方案，做到学有所伴，问有所答！
       </div>
       <div class="btndiv">
-        <el-button class="btndivbtn questionsbtn" @click="topage('questions')">
+        <el-button class="btndivbtn questionsbtn" @click="topage('questions/list')">
           前往
           <i class="el-icon-arrow-right el-icon--right" />
         </el-button>

@@ -35,6 +35,16 @@ export default new Router({
         {
           path: 'questions',
           component: () => import('@/views/user/questions/questions'),
+          children: [
+            {
+              path: 'list',
+              component: () => import('@/views/user/questions/childs/maincontent'),
+            },
+            {
+              path: 'show',
+              component: () => import('@/views/user/questions/childs/questionshow'),
+            }
+          ]
         },
         {
           path: 'blog',

@@ -3,7 +3,6 @@
     <!-- <span class="commentspan">评论一下吧</span> -->
     <el-input 
     class="replyinput"
-      v-model="comment"
       type="textarea"
       :autosize="{ minRows: 2, maxRows: 4}"
       placeholder="写下你的评论"

@@ -92,4 +92,7 @@ body,
   font-size: 15px;
   color: #769fcd;
 }
+*{
+  /* font-family: 楷体; */
+}
 </style>

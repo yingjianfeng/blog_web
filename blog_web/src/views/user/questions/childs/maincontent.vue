@@ -6,7 +6,7 @@
         <span class="top-title-value">5</span>
       </div>
       
-      <div class="item" v-for="(item,key) in questions.question" :key="key">
+      <div class="item" v-for="(item,key) in questions.question" :key="key" @click="toshow(item)">
         
         <div class="item-left">
           <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
@@ -15,15 +15,24 @@
           <div class="item-right-top">{{item.question.title}}</div>
           <div class="item-right-content">{{item.question.content}}</div>
           <div class="item-right-bottom">
-            <el-tag type="danger">未解决</el-tag>
+            <el-tag type="danger" v-if="item.question.resolve_id !=0">未解决</el-tag>
+            <el-tag type="success" v-else>已解决</el-tag>
             <span class="item-right-bottom-time">{{item.question.create_time}}</span>
           </div>
         </div>
       </div>
 
       <div class="item-page">
-        <el-pagination layout="prev, pager, next" :total="30"></el-pagination>
+        <el-pagination 
+        layout="prev, pager, next"
+          :page-size="questions.size"
+          :total="questions.total"
+          @prev-click="pre"
+          @next-click="next"
+          @current-change="pagechange"
+        ></el-pagination>
       </div>
+      
     </el-card>
   </div>
 </template>
@@ -35,29 +44,50 @@ export default {
     return {
       questions:{
         question:[],
-        total: 1,
-        size:5,
+        size:3,
+        total:5,
         pagenumber:1
       }
     };
   },
   methods: {
-    qryquestion() {
+    qryquestion(pagenumber,size) {
       const that = this;
-      that.$axios.get("/question/qryquestions/"+that.questions.pagenumber+"/"+that.questions.size).then(function(res){
+      that.$axios.get("/question/qryquestions/"+pagenumber+"/"+size).then(function(res){
            console.log(res.data.data.question);
-           that.questions.question = res.data.data.question
+           that.questions = res.data.data
 
       })
+    },
+     pre() {
+      // console.log("pre");
+      this.qryquestion(--this.questions.pagenumber, this.questions.size);
+    },
+    next() {
+      // console.log("next");
+      this.qryquestion(++this.questions.pagenumber, this.questions.size);
+    },
+    pagechange(cpage) {
+      this.pagenumber = cpage;
+      this.qryquestion(this.questions.pagenumber, this.questions.size);
+    },
+    toshow(question){
+       this.$router.push({
+        path: "/user/questions/show",
+        query: {
+          question: JSON.stringify(question)
+        }
+      });
     }
   },
   created(){
-    this.qryquestion()
+    this.qryquestion(this.questions.pagenumber,this.questions.size)
   }
 };
 </script>
 
 <style>
+
 #questionsmaincontent {
   background: white;
 }

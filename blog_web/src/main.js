@@ -44,10 +44,14 @@ axios.interceptors.response.use(response => {
       router.replace({
         path: '/'
       })
-      ElementUI.Message({
-        message: '未登录',
-        type: 'error'
-      });
+      if(localStorage.getItem('token')!=null){
+        localStorage.setItem("token",'null'),
+        ElementUI.Message({
+          message: '未登录',
+          type: 'error'
+        });
+      }
+      
       return null;
   }
   return response;
