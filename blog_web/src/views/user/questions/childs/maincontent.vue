@@ -5,40 +5,18 @@
         <span class="top-title">Q&amp;A累计：</span>
         <span class="top-title-value">5</span>
       </div>
-      <div class="item">
+      
+      <div class="item" v-for="(item,key) in questions.question" :key="key">
+        
         <div class="item-left">
           <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
         </div>
         <div class="item-right">
-          <div class="item-right-top">【张小飞】 blog开发日记</div>
+          <div class="item-right-top">{{item.question.title}}</div>
+          <div class="item-right-content">{{item.question.content}}</div>
           <div class="item-right-bottom">
             <el-tag type="danger">未解决</el-tag>
-            <span class="item-right-bottom-time">2020-07-13 12:00:00</span>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="item-left">
-          <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-        </div>
-        <div class="item-right">
-          <div class="item-right-top">【张小飞】 blog开发日记</div>
-          <div class="item-right-bottom">
-            <el-tag type="danger">未解决</el-tag>
-
-            <span class="item-right-bottom-time">2020-07-13 12:00:00</span>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="item-left">
-          <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-        </div>
-        <div class="item-right">
-          <div class="item-right-top">【张小飞】 blog开发日记</div>
-          <div class="item-right-bottom">
-            <el-tag type="danger">未解决</el-tag>
-            <span class="item-right-bottom-time">2020-07-13 12:00:00</span>
+            <span class="item-right-bottom-time">{{item.question.create_time}}</span>
           </div>
         </div>
       </div>
@@ -54,7 +32,27 @@
 export default {
   name: "maincontent",
   data() {
-    return {};
+    return {
+      questions:{
+        question:[],
+        total: 1,
+        size:5,
+        pagenumber:1
+      }
+    };
+  },
+  methods: {
+    qryquestion() {
+      const that = this;
+      that.$axios.get("/question/qryquestions/"+that.questions.pagenumber+"/"+that.questions.size).then(function(res){
+           console.log(res.data.data.question);
+           that.questions.question = res.data.data.question
+
+      })
+    }
+  },
+  created(){
+    this.qryquestion()
   }
 };
 </script>

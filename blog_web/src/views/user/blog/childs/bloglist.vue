@@ -22,6 +22,7 @@
         </div>
         <div class="item-right">
           <div class="item-right-top">{{item.blog.title}}</div>
+          <div class="item-right-main">{{item.blog.intro}}</div>
           <div class="item-right-bottom">
             <i class="el-icon-view item-right-bottom-views">{{item.visit_times}}</i>
             <span class="item-right-bottom-time">{{item.blog.create_date}}</span>
@@ -106,7 +107,7 @@ export default {
   background: white;
 }
 
-.top {
+#bloglist .top {
   margin-left: 10px;
   line-height: 30px;
   font-size: 20px;

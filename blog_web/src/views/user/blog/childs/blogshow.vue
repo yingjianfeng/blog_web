@@ -8,7 +8,7 @@
           <div class="blog-top-bottom-left">
             <span class="blog-top-bottom-left-name">{{user.name}}</span>
             <span class="blog-top-bottom-left-date">{{blog.create_date}}</span>
-            <i class="el-icon-view">50</i>
+            <i class="el-icon-view">{{visit_times}}</i>
           </div>
         </el-col>
         <el-col :xs="0" :sm="8" :md="8" :lg="7"></el-col>
@@ -35,8 +35,8 @@
     </div>
     <el-divider></el-divider>
     <div class="blog-bottom">
-      <blogcommentinput :flag="flag" :blog="blog" ></blogcommentinput>
-      <blogcomment :firstcomments="firstcomments" ></blogcomment>
+      <blogcommentinput :flag="flag" :blog="blog"></blogcommentinput>
+      <blogcomment :firstcomments="firstcomments"></blogcomment>
     </div>
   </el-card>
 </template>
@@ -61,8 +61,9 @@ export default {
         first: 1
       },
       blog: JSON.parse(this.$route.query.blog).blog,
+      visit_times: JSON.parse(this.$route.query.blog).visit_times,
       user: JSON.parse(this.$route.query.blog).user,
-      firstcomments: [],
+      firstcomments: []
     };
   },
   watch: {
@@ -72,7 +73,7 @@ export default {
         if (oldValue.first < newValue.first) {
           that.qryfirstcomment();
         }
-        
+
         //
       },
       deep: true
@@ -85,12 +86,22 @@ export default {
       var id = that.blog.id;
       that.$axios.get("/blog/qryfirstcomment/" + id).then(function(response) {
         that.firstcomments = response.data.data;
-        
+      });
+    },
+    addblogvisit() {
+      console.log("增加次数");
+      const that = this;
+       var id = that.blog.id;
+      that.$axios.get("/blog/addblogvisittimes/" + id).then(function(response) {
+       
+        console.log(response.data);
+        ++that.visit_times
       });
     }
   },
   created() {
     this.qryfirstcomment();
+    this.addblogvisit();
   }
 };
 </script>

@@ -1,8 +1,8 @@
 <template>
   <div id="carousel">
     <el-carousel :interval="5000" arrow="always">
-      <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
+      <el-carousel-item v-for="item in carousel" :key="item">
+       <img :src="item" width="100%" height="100%">
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -12,7 +12,23 @@
 export default {
   name: "carousel",
   data() {
-    return {};
+    return {
+      carousel :[]
+    };
+  },
+  methods: {
+    qrycarousel() {
+      const that = this;
+      that.$axios.get("/index/qrycarousel").then(function(response) {
+        var vo = response.data.data;
+        console.log(vo);
+        that.carousel =vo;
+      });
+    }
+  },
+  created(){
+
+    this.qrycarousel()
   }
 };
 </script>
