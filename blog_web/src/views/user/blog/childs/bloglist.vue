@@ -171,7 +171,7 @@ export default {
 .el-tag {
   height: 15px;
   line-height: 15px;
-  font-size: 10px;
+  /* font-size: 10px; */
 }
 #showedit {
   display: none;

@@ -15,7 +15,7 @@
             </div>
           </el-col>
           <el-col :xs="0" :sm="16" :md="16" :lg="16">
-            <el-menu mode="horizontal" @select="topage">
+            <el-menu mode="horizontal" @select="topage" :default-active="i">
               <el-menu-item index="index">首页</el-menu-item>
               <el-menu-item index="questions/list">问答</el-menu-item>
               <el-menu-item index="blog/list">博客</el-menu-item>
@@ -57,7 +57,8 @@ export default {
   props: ["isshow"],
   data() {
     return {
-      user: {}
+      user: {},
+      i: "index"
     };
   },
   methods: {
@@ -68,7 +69,8 @@ export default {
         this.$router.push("/");
         return;
       }
-
+      this.i = pagecode;
+      window.localStorage.setItem("cloud_index", pagecode);
       this.$router.push("/user/" + pagecode);
     },
     getbaseinfo() {
@@ -85,6 +87,10 @@ export default {
 
   created() {
     this.getbaseinfo();
+    var temp = window.localStorage.getItem("cloud_index");
+    if (temp != null) {
+      this.i = temp;
+    }
   }
 };
 </script>
@@ -115,7 +121,7 @@ export default {
   /* justify-content: center; */
   justify-content: flex-start;
 }
-.left-bar-logo{
+.left-bar-logo {
   width: 100%;
   height: 100%;
   font-size: 30px;

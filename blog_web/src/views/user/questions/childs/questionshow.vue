@@ -43,15 +43,18 @@
             <span class="nickname">{{item.user.nickname}}</span>
             <span class="time">{{item.questionComment.create_time}}</span>
           </div>
-          <div class="comment-right-center">{{item.questionComment.content}}</div>
+          <div class="comment-right-center">{{item.questionComment.comment}}</div>
           <div class="comment-right-bottom">
             <i class="el-icon-chat-line-round">{{item.commoent_number}}</i>
             &nbsp;
             <i class="el-icon-thumb">{{item.comment_like}}</i>
           </div>
-          <questioncommentreply :p_id=item.questionComment.id></questioncommentreply>
+          <questioncommentreply
+            :question="question"
+            :p_comment="item"
+            :p_id="item.questionComment.id"
+          ></questioncommentreply>
         </div>
-        
       </div>
     </div>
   </div>
@@ -82,6 +85,9 @@ export default {
         })
         .then(function(response) {
           console.log(response);
+          let NewPage = "_empty" + "?time=" + new Date().getTime() / 500;
+          that.$router.push(NewPage);
+          that.$router.go(-1);
         });
     },
     qryfirstcomment() {
@@ -90,6 +96,9 @@ export default {
         .get("/question/qryfirstcomment/" + that.question.id, {})
         .then(function(response) {
           that.comment = response.data.data;
+          console.log("comment");
+          console.log(response.data.data);
+          console.log("comment");
         });
     },
     qrysecondcomment(id) {

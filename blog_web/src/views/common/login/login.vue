@@ -109,7 +109,7 @@ export default {
           var code = response.data.code;
           if (code == 200) {
             that.$message.success("登录成功");
-            that.$router.push("/user/questions");
+            that.$router.push("/user/index");
             localStorage.setItem("cloud_blog_token",response.data.data);       //登录成功本地设置token
           } else {
             that.$message.error(response.data.message);
