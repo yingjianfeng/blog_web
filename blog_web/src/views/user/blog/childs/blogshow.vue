@@ -1,5 +1,5 @@
 <template>
-  <el-card id="blogedit">
+  <el-card id="blogshow">
     <div class="blog-top">
       <span class="blog-top-title">{{blog.title}}</span>
       <div class="blog-top-bottom">

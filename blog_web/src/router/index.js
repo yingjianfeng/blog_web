@@ -16,6 +16,10 @@ export default new Router({
       component: () => import('@/views/common/login/login')
     },
     {
+      path: '/register',
+      component: () => import('@/views/common/register/register')
+    },
+    {
       path: '/user',
       component: () => import('@/views/user/user'),
       children: [
@@ -43,6 +47,9 @@ export default new Router({
             {
               path: 'show',
               component: () => import('@/views/user/questions/childs/questionshow'),
+            },{
+              path: 'questionedit',
+              component: () => import('@/views/user/questions/childs/questionedit'),
             }
           ]
         },

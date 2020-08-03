@@ -13,7 +13,7 @@
         <i class="el-icon-document"></i>
         <span slot="title">博客</span>
       </el-menu-item>
-      <el-menu-item index="bug">
+      <el-menu-item index="bug" disabled>
         <i class="el-icon-setting"></i>
         <span slot="title">维护中心</span>
       </el-menu-item>

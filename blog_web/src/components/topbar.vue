@@ -19,7 +19,7 @@
               <el-menu-item index="index">首页</el-menu-item>
               <el-menu-item index="questions/list">问答</el-menu-item>
               <el-menu-item index="blog/list">博客</el-menu-item>
-              <el-menu-item index="bug">维护中心</el-menu-item>
+              <el-menu-item index="bug" disabled>维护中心</el-menu-item>
             </el-menu>
           </el-col>
         </div>

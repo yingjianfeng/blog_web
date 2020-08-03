@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <div class="top">
         <span class="top-title">Q&amp;A累计：</span>
-        <span class="top-title-value">5</span>
+        <span class="top-title-value">{{questions.total}}</span>
       </div>
       
       <div class="item" v-for="(item,key) in questions.question" :key="key" @click="toshow(item)">
@@ -68,7 +68,7 @@ export default {
       this.qryquestion(++this.questions.pagenumber, this.questions.size);
     },
     pagechange(cpage) {
-      this.pagenumber = cpage;
+      this.questions.pagenumber = cpage;
       this.qryquestion(this.questions.pagenumber, this.questions.size);
     },
     toshow(question){
@@ -139,5 +139,9 @@ export default {
   display: flex;
   justify-content: center;
   margin-top: 50px;
+}
+.el-tag{
+  line-height: 20px;
+  height: 20px;
 }
 </style>

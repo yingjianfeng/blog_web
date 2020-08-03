@@ -4,6 +4,7 @@
     <el-input 
     class="replyinput"
       type="textarea"
+      v-model="comment"
       :autosize="{ minRows: 2, maxRows: 4}"
       placeholder="写下你的评论"
     ></el-input>
@@ -42,7 +43,7 @@ export default {
 <style>
 #blogcommentinput {
 }
-.bottom {
+#blogcommentinput .bottom {
   margin-top: 5px;
   margin-bottom: 5px;
   display: flex;

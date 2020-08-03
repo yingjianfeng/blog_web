@@ -120,8 +120,8 @@ export default {
 .top-title-value {
   color: #769fcd;
 }
-.top-right{
-   margin-left: 10px;
+.top-right {
+  margin-left: 10px;
   line-height: 30px;
   font-size: 20px;
 }
@@ -169,8 +169,8 @@ export default {
 }
 
 .el-tag {
-  height: 15px;
-  line-height: 15px;
+  height: 20px;
+  line-height: 20px;
   /* font-size: 10px; */
 }
 #showedit {

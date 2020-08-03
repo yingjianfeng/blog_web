@@ -1,6 +1,6 @@
 <template>
   <div id="tips">
-    <el-button class="tipsbtn">发布问题</el-button>
+    <el-button class="tipsbtn" @click="toedit">发布问题</el-button>
     <el-card class="box-card pact">
       <span class="rule-title">社区公约</span>
       <p class="rule-content">提问内容描述一定要清楚，回答尽量靠近主题，禁止瞎水社区，违者暂停账号使用</p>
@@ -33,6 +33,11 @@ export default {
   name: "tips",
   data() {
     return {};
+  },
+  methods:{
+    toedit(){
+       this.$router.push("/user/questions/questionedit");
+    }
   }
 };
 </script>

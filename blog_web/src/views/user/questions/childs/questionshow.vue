@@ -154,6 +154,10 @@ export default {
   display: flex;
   justify-content: center;
 }
+.reply .bottom{
+  display: flex;
+  justify-content:  flex-end
+}
 .bottom .content {
   margin-top: 20px;
   font-size: 23px;

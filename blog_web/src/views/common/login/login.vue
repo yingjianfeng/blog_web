@@ -23,6 +23,11 @@
           >{{check.message}}</el-button>
         </el-row>
         <el-button class="submit mt10 c769fcd white" @click="login()">登录</el-button>
+
+        <div class="toregister">
+          
+          <el-link type="primary" href="/register">没有？去注册</el-link>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -174,5 +179,9 @@ export default {
 
 .el-message {
   width: 200px;
+}
+.toregister{
+  display: flex;
+  justify-content: flex-end
 }
 </style>
